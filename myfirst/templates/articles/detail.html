@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %} {{article.article_title}} {% endblock %}
+{% block content %}
+<section class="article-detail">
+    <h1>{{article.article_title}}</h1>
+    <span class="article_author-detail"><cite>{{article.article_user}}</cite></span>
+    <span class="pub_date-detail">
+        {% if article.was_published_recently %}
+             <span class="fresh">FRESH</span>
+        {% endif%}
+        {{article.pub_date}}
+    </span>
+<p class="article_text-detail">{{article.article_text}}</p>
+</section>
+
+<hr>
+
+<section class="comments-li">
+    <h2 class="comments-h2">Comments</h2>
+    {% if latest_comments_list %}
+    {% for comment in latest_comments_list %}
+    <div class="review">
+        <p class="review-txt"> &nbsp;&nbsp;&nbsp;&nbsp;{{comment.comment_text}}</p>
+        <cite>
+            <div class="author d-flex flex-column">
+                <div class="arrow-cite"></div>
+                <span class="review-author">{{comment.author_name}}&nbsp;</span>
+                <span class="review-date">{{comment.com_date}}</span>
+            </div>
+        </cite>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="review">
+            No comments yet
+    </div>
+{% endif %}
+</section>
+<hr>
+<section class="comment-add">
+    <form class="comment-form user-form" action=" {% url 'articles:leave_comment' article.id %}" method="post">
+
+        {% csrf_token %}
+        {% if request.user.is_authenticated %}
+            <p><input style="display:none" value={{user.username}} type="text" required placeholder="Your name", name="name"></p>
+        {% else %}
+            <input class="form-control" style="display:none" value="Guest" type="text" required placeholder="Your name", name="name">
+        {% endif %}
+
+        <p><textarea class="form-control" name="text" required placeholder="Your comment" cols="30" rows="8"></textarea></p>
+        <button class="btn btn-dark" type="submit">Comment</button>
+    </form>
+</section>
+
+{% endblock %}

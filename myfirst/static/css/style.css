@@ -1,0 +1,26 @@
+body {
+    font-family: sans-serif;
+    background-color: blue;
+}
+
+.red {
+    color: red!important;
+}
+
+
+
+.right {
+    float: right!important;
+}
+
+.contain {
+    padding: 100px;
+    width: 100%;
+    margin: 0 auto
+}
+
+section {
+    padding: 20px 10%;
+    overflow: hidden;
+    width: 100%;
+}

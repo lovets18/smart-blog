@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} Last articles {% endblock %}
+{% block content %}
+
+<section class="articles-list">
+    <a name="top"></a>
+        <a href="#top" class="top-link">
+            <svg class="top-arrow" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 226 226" style=" fill: #000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                    <path d="M0,226v-226h226v226z" fill="none"></path>
+                    <g fill="#000000">
+                        <path d="M113,23.37688l-96.79156,96.79156c-2.36594,2.26 -3.31937,5.63234 -2.48953,8.81047c0.82984,3.16047 3.30172,5.63234 6.46219,6.46219c3.17813,0.82984 6.55047,-0.12359 8.81047,-2.48953l84.00844,-84.00844l84.00844,84.00844c2.26,2.36594 5.63234,3.31938 8.81047,2.48953c3.16047,-0.82984 5.63234,-3.30172 6.46219,-6.46219c0.82984,-3.17812 -0.12359,-6.55047 -2.48953,-8.81047zM113,82.13688l-96.79156,96.79156c-2.36594,2.26 -3.31937,5.63234 -2.48953,8.81047c0.82984,3.16047 3.30172,5.63234 6.46219,6.46219c3.17813,0.82984 6.55047,-0.12359 8.81047,-2.48953l84.00844,-84.00844l84.00844,84.00844c2.26,2.36594 5.63234,3.31937 8.81047,2.48953c3.16047,-0.82984 5.63234,-3.30172 6.46219,-6.46219c0.82984,-3.17813 -0.12359,-6.55047 -2.48953,-8.81047z"></path>
+                    </g>
+                </g>
+            </svg>
+        </a>
+    {% if latest_articles_list %}
+        <h1 class="margin">Articles</h1>
+        {% for a in latest_articles_list %}
+        <div class="article-li">
+            <a href="{% url 'articles:detail' a.id%}"><h2>{{a.article_title}}</h2></a>
+            <span class="article_author-li"><cite>{{a.article_user}}</cite></span>
+            <span class="pub_date-li">{{a.pub_date}}</span>
+            <p class="article_text-li">{{a.describe}}...</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <h1>Not found</h1>
+    {% endif %}
+</section>
+
+
+
+
+
+{% endblock %}

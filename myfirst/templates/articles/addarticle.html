@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %} {{article.article_title}} {% endblock %}
+{% block content %}
+
+
+
+<section class="addarticle-form">
+    {% if request.user.is_authenticated %}
+        <h1>Add Article</h1>
+        <form class="article-form" action=" {% url 'articles:added' user.id%}" method="post">
+
+            {% csrf_token %}
+            <p><input class="form-control" type="text" required placeholder="Article title", name="name"></p>
+            <p><textarea class="form-control" name="text" required placeholder="Article text" cols="30" rows="11"></textarea></p>
+            <button type="submit" class="btn btn-dark">Add</button>
+        </form>
+
+    {% else %}
+        <h1>You have to <a href="{% url 'articles:login' %}">sign in</a> firstly</h1>
+    {% endif %}
+
+
+</section>
+
+
+
+
+
+
+{% endblock %}
