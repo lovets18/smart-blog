@@ -25,7 +25,7 @@
         <cite>
             <div class="author d-flex flex-column">
                 <div class="arrow-cite"></div>
-                <span class="review-author">{{comment.author_name}}&nbsp;</span>
+                <span class="review-author">{{comment.comment_user}}&nbsp;</span>
                 <span class="review-date">{{comment.com_date}}</span>
             </div>
         </cite>
@@ -39,18 +39,21 @@
 </section>
 <hr>
 <section class="comment-add">
-    <form class="comment-form user-form" action=" {% url 'articles:leave_comment' article.id %}" method="post">
-
-        {% csrf_token %}
         {% if request.user.is_authenticated %}
-            <p><input style="display:none" value={{user.username}} type="text" required placeholder="Your name", name="name"></p>
+            <form class="comment-form user-form" action=" {% url 'articles:leave_comment' article.id user.id %}" method="post">
+
+                {% csrf_token %}
+
+                <p><input style="display:none" value={{user.username}} type="text" required placeholder="Your name", name="name"></p>
+                <p><textarea class="form-control" name="text" required placeholder="Your comment" cols="30" rows="8"></textarea></p>
+                <button class="btn btn-dark" type="submit">Comment</button>
+            </form>
         {% else %}
-            <input class="form-control" style="display:none" value="Guest" type="text" required placeholder="Your name", name="name">
+            <!--input class="form-control" style="display:none" value="Guest" type="text" required placeholder="Your name", name="name"/-->
+            <p class="comment-form user-form">You have to <a href="{% url 'articles:login' %}">sign in</a> firstly</p>
         {% endif %}
 
-        <p><textarea class="form-control" name="text" required placeholder="Your comment" cols="30" rows="8"></textarea></p>
-        <button class="btn btn-dark" type="submit">Comment</button>
-    </form>
+
 </section>
 
 {% endblock %}

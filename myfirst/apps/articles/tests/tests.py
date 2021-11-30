@@ -58,22 +58,24 @@ class CommentTestCase(TestCase):
     def setUp(self):
         user = User.objects.create_user(username='first')
         a = user.article_set.create(article_title='title', article_text='text', pub_date=timezone.now())
-        a.comment_set.create(author_name='name', comment_text='correct_comment_text', com_date=timezone.now())
+        a.comment_set.create(comment_user=user, comment_text='correct_comment_text', com_date=timezone.now())
 
     def test_comment___str__(self):
         """Comment.__str__() works correctly"""
-        com = Comment.objects.get(author_name="name")
-        self.assertEqual(com.__str__(), 'name')
+        user = User.objects.get(username='first')
+        com = Comment.objects.get(comment_user=user)
+        self.assertEqual(com.__str__(), 'correct_comment_text')
 
 
 class ArticlesListViewTest(TestCase):
 
     def setUp(self):
+        user_staff = User.objects.create_user(username='staff', password='secret', is_staff=True)
         number = 2
         for num in range(1, number):
             user = User.objects.create_user(username='user' + str(num), password='secret')
             a = user.article_set.create(article_title='title'+str(num), article_text='text', pub_date=timezone.now())
-            a.comment_set.create(author_name=user.username,
+            a.comment_set.create(comment_user=user,
                                  comment_text='correct_comment_text', com_date=timezone.now())
 
     def test_view_index_absolute_url(self):
@@ -128,7 +130,7 @@ class ArticlesListViewTest(TestCase):
         user = User.objects.get(username='user1')
         article = user.article_set.get(id=1)
         resp = c.post(reverse('articles:detail', args=(article.id,)), data={'name': user.username, 'text': 'comment text'})
-        self.assertTrue(article.comment_set.filter(author_name=user.username).exists())
+        self.assertTrue(article.comment_set.filter(comment_user=user).exists())
 
     def test_view_added_autorized(self):
         """added request correct"""
@@ -162,6 +164,15 @@ class ArticlesListViewTest(TestCase):
         """addarticle view if autorized"""
         c = Client()
         c.login(username='user1', password='secret')
+        resp = c.get('/addarticle/')
+        html = str(resp.content)
+        line = '<h1>You have to ask to <a href="/addarticle/ask/2/">become an author</a> firstly</h1>'
+        self.assertTrue(line in html)
+
+    def test_view_addarticle_staff(self):
+        """addarticle view if autorized"""
+        c = Client()
+        c.login(username='staff', password='secret')
         resp = c.get('/addarticle/')
         html = str(resp.content)
         line = '<h1>Add Article</h1>'

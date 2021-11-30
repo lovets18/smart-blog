@@ -167,6 +167,15 @@ STATIC_ROOT = Path(__file__).resolve().parent / 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST='mail.example.com'
+EMAIL_HOST_USER='test@example.com'
+EMAIL_HOST_PASSWORD='test123'
+EMAIL_PORT=26
+
+
+
 
 
 

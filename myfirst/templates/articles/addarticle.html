@@ -7,6 +7,7 @@
 
 <section class="addarticle-form">
     {% if request.user.is_authenticated %}
+        {% if  request.user.is_staff %}
         <h1>Add Article</h1>
         <form class="article-form" action=" {% url 'articles:added' user.id%}" method="post">
 
@@ -15,7 +16,9 @@
             <p><textarea class="form-control" name="text" required placeholder="Article text" cols="30" rows="11"></textarea></p>
             <button type="submit" class="btn btn-dark">Add</button>
         </form>
-
+        {% else %}
+        <h1>You have to ask to <a href="{% url 'articles:ask' user.id%}">become an author</a> firstly</h1>
+    {% endif %}
     {% else %}
         <h1>You have to <a href="{% url 'articles:login' %}">sign in</a> firstly</h1>
     {% endif %}
