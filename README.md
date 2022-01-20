@@ -12,7 +12,7 @@ myfirst/apps/articles/tests - директория с тестами, запус
 myfirst/apps/articles/tests/tests.py - тесты TestCase, проверяют модели, формы, представления, а также функцию коррекции текста
 myfirst/apps/articles/tests/tests_selenium.py - тесты Selenium, иммитируют поведение реального пользователя
 
-## myfirst/apps/articles/autocorrection.py -функции для коррекции текста
+### myfirst/apps/articles/autocorrection.py - функции для коррекции текста
 
 myfirst/apps/articles/forms.py - формы ввода
 
