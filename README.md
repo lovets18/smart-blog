@@ -1,18 +1,23 @@
 ﻿# smart-blog
 Многопользовательский блог, осуществляющий орфографический контроль введенного пользователем текста
 
+### myfirst/apps/articles/autocorrection.py - функции для коррекции текста
 
 myfirst/apps/articles - директория с файлами приложения articles
 
+<hr/>
+
 myfirst/apps/articles/static/ - статические файлы приложение articles
+
 myfirst/apps/articles/static/css - стили
+
 myfirst/apps/articles/static/images - изображение
 
 myfirst/apps/articles/tests - директория с тестами, запускаются командой python manage.py test articles из корня проекта
-myfirst/apps/articles/tests/tests.py - тесты TestCase, проверяют модели, формы, представления, а также функцию коррекции текста
-myfirst/apps/articles/tests/tests_selenium.py - тесты Selenium, иммитируют поведение реального пользователя
 
-### myfirst/apps/articles/autocorrection.py - функции для коррекции текста
+myfirst/apps/articles/tests/tests.py - тесты TestCase, проверяют модели, формы, представления, а также функцию коррекции текста
+
+myfirst/apps/articles/tests/tests_selenium.py - тесты Selenium, иммитируют поведение реального пользователя
 
 myfirst/apps/articles/forms.py - формы ввода
 
