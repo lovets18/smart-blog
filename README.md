@@ -1,5 +1,5 @@
 ﻿# smart-blog
-Курсовой проект по дисциплине Технология Разработки Программных Систем
+Многопользовательский блог, осуществляющий орфографический контроль введенного пользователем текста
 
 
 myfirst/apps/articles - директория с файлами приложения articles
@@ -23,10 +23,13 @@ myfirst/apps/articles/urls.py - пути в приложении articles
 myfirst/apps/articles/views.py - представления
 
 myfirst/static - статические файлы проекта
+
 myfirst/static/grapelli - кастомизация панели администратора
+
 myfirst/static/admin - панель администратора
 
 myfirst/templates/base.html - базовый шаблон для рендеринга
+
 myfirst/templates/articles - частные шаблоны для рендеринга
 
 myfirst/settings.py - файл настроек
@@ -35,6 +38,9 @@ myfirst/urls.py - файл путей проекта
 manage.py - файл для управления проектом
 
 для первоначальной настройки:
+
 python manage.py makemigrations
+
 python manage.py migrate
+
 python manage.py runserver
